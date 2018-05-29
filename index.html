@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sand Dunes</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<link href="assets/css/style.css" type="text/css" rel="stylesheet">
+
+  </head>
+
+  <body onload="setVarsStartCloak()">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Sands of Time</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">These
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Buttons</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Don't</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Work</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+		<div class="slideshow-container">
+
+		  <div onmouseover="stopSlider()" onmouseout="startSlider()">
+			<img id="currentImage" style="width:100%">
+			<div id="slideTitle" class="text"></div>
+			<div id="slideText" class="title"></div>			
+		  </div>
+
+		  <a class="prev" onclick="minusSlides()"><i class="fa fa-chevron-left" style="font-size:24px"></i></a>
+		  <a class="next" onclick="plusSlides()"><i class="fa fa-chevron-right" style="font-size:24px"></i></a>
+		</div>
+		<br>
+
+		<div style="text-align:center">
+		  <span class="dot" onclick="currentSlide(1)"></span> 
+		  <span class="dot" onclick="currentSlide(2)"></span> 
+		  <span class="dot" onclick="currentSlide(3)"></span> 
+		  <span class="dot" onclick="currentSlide(4)"></span> 
+		  <span class="dot" onclick="currentSlide(5)"></span> 
+		</div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="assets/jquery/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<script type="text/javascript">
+		
+			var slideIndex = 1;
+			var timerOk = 1;
+			var timerCnt = 0;
+
+		var imgTitle = [
+				"Star dunes",
+				"Linear dunes",
+				"Void of Vegetation",
+				"Crescentic dunes",
+				"Tormenting Dunes"
+				];
+				
+		var imgText = [
+				"Away to the west the sun was sinking into a violet sea of light. There lay the mighty desert, brown, barren, desolate in it's vast retreat, the desert with its dreaded sand storms and simooms.",
+				"Straight or slightly sinuous sand ridges typically much longer than they are wide are known as linear dunes. They may be more than 160 kilometers long. Linear dunes may occur as isolated ridges, but they generally form sets of parallel ridges separated by miles of sand.",
+				"The desert at twilight was a vast undulating sea, punctuated by the shadowy silhouettes of cactus, like great ghost ships upon the sandy waves. Here and there loomed tall columns, and one rocky mass shaped like a pipe organ.",
+				"Simple dunes are basic forms with a minimum number of slipfaces that define the geometric type. Compound dunes are large dunes on which smaller dunes of similar type and slipface orientation are superimposed on it's maximum angle of repose.",
+				"The cruel sun beat down, it's one malevolent eye unblinking, and the sky was it's co-conspirator with not even a wisp of cloud to soften the harsh rays. Each step sunk into the searing sand, the air was thick and hazy, each breath like drowning in larva."
+				];
+		
+		function setVarsStartCloak() {		
+			slideIndex = showSlides(slideIndex);
+			setInterval(masterTimer, 1000);
+		}
+
+		function masterTimer() {	
+			if (timerOk) { timerCnt += 1; }
+			if (timerCnt > 6) { 
+				slideIndex = showSlides(slideIndex); 
+				timerCnt = 0;
+				}				
+		}
+
+		function plusSlides() {
+			slideIndex += 1;
+			timerCnt = 0;
+			slideIndex = showSlides(slideIndex);
+		}
+
+		function minusSlides() {
+			slideIndex -= 1;				
+			timerCnt = 0;				
+			slideIndex = showSlides(slideIndex);
+		}
+		
+		function currentSlide(n) {
+			slideIndex = showSlides(n);
+		}
+		
+		function stopSlider(){	
+			timerOk = 0;			
+		}
+
+		function startSlider(){		
+			timerOk = 1;				
+		}
+		
+		function showSlides(index) {
+			var slide = "assets/images/image" + index.toString() + ".png";
+			$("#currentImage").attr("src",slide).show();
+			$("#slideTitle").text( imgTitle[index-1] );
+			$("#slideText").text( imgText[index-1] );		
+			$(".next, .prev").show();
+			if (index == 1) {
+				$(".prev").hide();
+			} else if (index >= imgTitle.length) {
+				$(".next").hide();			
+			}
+			index >= imgTitle.length ? (index = 1) : (index += 1);		
+			return index;
+		}
+
+	</script>
+
+  </body>
+
+</html>
